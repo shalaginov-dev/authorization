@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String @id @default(cuid())
+  email       String @unique
+  name        String
+  password    String
+  role        Int
+
+  @@map("users")
+}
+
+model RevokedToken {
+  id          String @id @default(uuid())
+  token       String 
+  
+  @@map("revoked_tokens")
+}
